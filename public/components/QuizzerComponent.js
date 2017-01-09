@@ -94,7 +94,9 @@ if (window.FC === undefined) {
 
         var cardShower;
         var cardNavigation;
-        if (this.state.cards !== undefined && this.state.cards.length > 0) {
+
+        if (this.state.cards !== undefined) {
+
           var currentCard = this.state.cards[this.state.currentCard];
           var textToShow = this.state.showFront ? currentCard.front : currentCard.back;
 

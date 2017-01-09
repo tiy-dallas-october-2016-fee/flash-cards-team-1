@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -29,7 +29,7 @@ if (window.FC === undefined) {
     }
 
     _createClass(SetViewComponent, [{
-      key: "componentDidMount",
+      key: 'componentDidMount',
       value: function componentDidMount() {
         var _this2 = this;
 
@@ -43,34 +43,44 @@ if (window.FC === undefined) {
         FC.UserData.getSet(this.props.params.setId, cb);
       }
     }, {
-      key: "render",
+      key: 'render',
       value: function render() {
 
         var cardList;
+        var showQuizzer;
         if (this.state.cards.length === 0) {
           cardList = React.createElement(
-            "div",
+            'div',
             null,
-            "You have no cards."
+            'You have no cards.'
           );
         } else {
+          showQuizzer = React.createElement(
+            'li',
+            null,
+            React.createElement(
+              ReactRouter.Link,
+              { to: '/set/' + this.props.params.setId + '/quizzer' },
+              'Quizzer'
+            )
+          );
           cardList = React.createElement(
-            "ul",
+            'ul',
             null,
             this.state.cards.map(function (card) {
               return React.createElement(
-                "li",
-                { key: card.id, className: "card" },
+                'li',
+                { key: card.id, className: 'card' },
                 React.createElement(
-                  "div",
-                  { className: "front" },
-                  "Front: ",
+                  'div',
+                  { className: 'front' },
+                  'Front: ',
                   card.front
                 ),
                 React.createElement(
-                  "div",
-                  { className: "back" },
-                  "Back: ",
+                  'div',
+                  { className: 'back' },
+                  'Back: ',
                   card.back
                 )
               );
@@ -79,41 +89,33 @@ if (window.FC === undefined) {
         }
 
         return React.createElement(
-          "div",
-          { className: "set-component" },
+          'div',
+          { className: 'set-component' },
           React.createElement(
-            "h2",
+            'h2',
             null,
-            "Set: ",
+            'Set: ',
             this.state.name,
-            " (id: ",
+            ' (id: ',
             this.props.params.setId,
-            ")"
+            ')'
           ),
           React.createElement(
-            "div",
-            { className: "controls" },
+            'div',
+            { className: 'controls' },
             React.createElement(
-              "ul",
+              'ul',
               null,
               React.createElement(
-                "li",
+                'li',
                 null,
                 React.createElement(
                   ReactRouter.Link,
                   { to: '/set/' + this.props.params.setId + '/newcard' },
-                  "Add a New Card"
+                  'Add a New Card'
                 )
               ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  ReactRouter.Link,
-                  { to: '/set/' + this.props.params.setId + '/quizzer' },
-                  "Quizzer"
-                )
-              )
+              showQuizzer
             )
           ),
           cardList
