@@ -12,7 +12,7 @@ if (window.FC === undefined) { window.FC = {}; }
         method: 'POST',
         data: {
           name: this.nameInput.value,
-          description: this.descriptionInput.value
+          description: this.descriptionTextarea.value
         }
       })
       .done((data) => {
@@ -30,7 +30,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
           <input placeholder="name" ref={(input) => { this.nameInput = input; }} />
 
-          <input placeholder="description" ref={(input) => { this.descriptionInput = input; }} />
+          <textarea placeholder="description" ref={(textarea) => { this.descriptionTextarea = textarea; }} />
 
           <button>Save</button>
         </form>

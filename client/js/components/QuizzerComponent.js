@@ -14,9 +14,7 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     componentDidMount() {
-
       var cb = (set) => {
-
         // copy and shuffle array
         var shuffledCards = _.shuffle(set.cards.slice(0));
 
@@ -38,13 +36,12 @@ if (window.FC === undefined) { window.FC = {}; }
       this.setState(copiedState);
     }
 
-    endResetValidation() {
+    endResetValidation(){
       var currentPosition = this.state.currentCard;
       if (currentPosition + 1 >= this.state.cards.length) {
         ReactRouter.browserHistory.goBack();
         return;
       }
-
       var copiedState = Object.assign({}, this.state);
       copiedState.currentCard += 1;
       this.setState(copiedState);
@@ -57,6 +54,7 @@ if (window.FC === undefined) { window.FC = {}; }
       FC.UserData.incrementCorrectCountOnCard(this.props.params.setId, card.id, () => {});
 
       this.endResetValidation();
+
     }
 
     markIncorrect() {
@@ -72,9 +70,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
       var cardShower;
       var cardNavigation;
-
-      if (this.state.cards !== undefined) {
-
+      if (this.state.cards !== undefined && this.state.cards.length > 0) {
         var currentCard = this.state.cards[this.state.currentCard];
         var textToShow = this.state.showFront ? currentCard.front: currentCard.back;
 

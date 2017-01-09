@@ -10,6 +10,13 @@
     width: 42%;
   }
 
+  .back {
+    border: 1px solid red;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+  }
+
   .front {
     margin: 5px 0;
   }

@@ -11,7 +11,7 @@ if (window.FC === undefined) { window.FC = {}; }
         ReactRouter.browserHistory.goBack();
       };
 
-      FC.UserData.addCardToSet(this.props.params.setId, this.frontInput.value, this.backInput.value, cb);
+      FC.UserData.addCardToSet(this.props.params.setId, this.frontInput.value, this.backTextarea.value, cb);
     }
 
     render() {
@@ -22,7 +22,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
           <input placeholder="front" ref={(input) => {this.frontInput = input; }} />
 
-          <input placeholder="back" ref={(input) => {this.backInput = input; }} />
+          <textarea placeholder="back" ref={(textarea) => {this.backTextarea = textarea; }} />
 
           <button>Save</button>
 

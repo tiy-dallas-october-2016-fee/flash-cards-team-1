@@ -27,12 +27,10 @@ if (window.FC === undefined) { window.FC = {}; }
     render() {
 
       var cardList;
-      var showQuizzer;
       if (this.state.cards.length === 0) {
         cardList = <div>You have no cards.</div>
       }
       else {
-        showQuizzer = <li><ReactRouter.Link to={'/set/' + this.props.params.setId + '/quizzer'}>Quizzer</ReactRouter.Link></li>;
         cardList = <ul>
           {this.state.cards.map((card) => {
             return <li key={card.id} className="card">
@@ -49,7 +47,7 @@ if (window.FC === undefined) { window.FC = {}; }
         <div className="controls">
           <ul>
             <li><ReactRouter.Link to={'/set/' + this.props.params.setId + '/newcard'}>Add a New Card</ReactRouter.Link></li>
-            {showQuizzer}
+            <li><ReactRouter.Link to={'/set/' + this.props.params.setId + '/quizzer'}>Quizzer</ReactRouter.Link></li>
           </ul>
 
 
