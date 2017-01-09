@@ -38,7 +38,6 @@ if (window.FC === undefined) {
         var _this2 = this;
 
         FC.UserData.loadSets(function (data) {
-
           _this2.setState({
             sets: data.sets
           });
@@ -72,8 +71,8 @@ if (window.FC === undefined) {
         var _this4 = this;
 
         console.log('SetList.render', this.state);
-        var noSetsMessaging;
 
+        var noSetsMessaging;
         if (this.state.sets.length === 0) {
           noSetsMessaging = React.createElement(
             'p',
@@ -101,7 +100,6 @@ if (window.FC === undefined) {
             null,
             this.state.sets.map(function (set, index) {
               var noCardsMessaging;
-
               if (set.cards.length > 0) {
                 noCardsMessaging = React.createElement(
                   'div',
@@ -111,7 +109,6 @@ if (window.FC === undefined) {
                   'quiz'
                 );
               }
-
               return React.createElement(
                 'li',
                 { key: set.id, className: 'set' },

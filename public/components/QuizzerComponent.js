@@ -34,7 +34,6 @@ if (window.FC === undefined) {
         var _this2 = this;
 
         var cb = function cb(set) {
-
           // copy and shuffle array
           var shuffledCards = _.shuffle(set.cards.slice(0));
 
@@ -63,7 +62,6 @@ if (window.FC === undefined) {
           ReactRouter.browserHistory.goBack();
           return;
         }
-
         var copiedState = Object.assign({}, this.state);
         copiedState.currentCard += 1;
         this.setState(copiedState);
@@ -94,9 +92,7 @@ if (window.FC === undefined) {
 
         var cardShower;
         var cardNavigation;
-
-        if (this.state.cards !== undefined) {
-
+        if (this.state.cards !== undefined && this.state.cards.length > 0) {
           var currentCard = this.state.cards[this.state.currentCard];
           var textToShow = this.state.showFront ? currentCard.front : currentCard.back;
 

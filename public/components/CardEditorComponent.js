@@ -31,7 +31,7 @@ if (window.FC === undefined) {
           ReactRouter.browserHistory.goBack();
         };
 
-        FC.UserData.addCardToSet(this.props.params.setId, this.frontInput.value, this.backInput.value, cb);
+        FC.UserData.addCardToSet(this.props.params.setId, this.frontInput.value, this.backTextarea.value, cb);
       }
     }, {
       key: "render",
@@ -54,8 +54,8 @@ if (window.FC === undefined) {
             React.createElement("input", { placeholder: "front", ref: function ref(input) {
                 _this2.frontInput = input;
               } }),
-            React.createElement("input", { placeholder: "back", ref: function ref(input) {
-                _this2.backInput = input;
+            React.createElement("textarea", { placeholder: "back", ref: function ref(textarea) {
+                _this2.backTextarea = textarea;
               } }),
             React.createElement(
               "button",
