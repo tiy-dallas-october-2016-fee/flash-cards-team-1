@@ -38,12 +38,7 @@ if (window.FC === undefined) { window.FC = {}; }
       this.setState(copiedState);
     }
 
-    markCorrect() {
-
-      var card = this.state.cards[this.state.currentCard];
-      card.correctCount += 1;
-      FC.UserData.incrementCorrectCountOnCard(this.props.params.setId, card.id, () => {});
-
+    endResetValidation() {
       var currentPosition = this.state.currentCard;
       if (currentPosition + 1 >= this.state.cards.length) {
         ReactRouter.browserHistory.goBack();
@@ -55,21 +50,29 @@ if (window.FC === undefined) { window.FC = {}; }
       this.setState(copiedState);
     }
 
+    markCorrect() {
+
+      var card = this.state.cards[this.state.currentCard];
+      card.correctCount += 1;
+      FC.UserData.incrementCorrectCountOnCard(this.props.params.setId, card.id, () => {});
+
+      this.endResetValidation();
+    }
+
     markIncorrect() {
       var card = this.state.cards[this.state.currentCard];
       card.incorrectCount += 1;
       FC.UserData.incrementIncorrectCountOnCard(this.props.params.setId, card.id, () => {});
 
-      var copiedState = Object.assign({}, this.state);
-      copiedState.currentCard += 1;
-      this.setState(copiedState);
+      this.endResetValidation();
+
     }
 
     render() {
 
       var cardShower;
       var cardNavigation;
-      if (this.state.cards !== undefined) {
+      if (this.state.cards !== undefined && this.state.cards.length > 0) {
         var currentCard = this.state.cards[this.state.currentCard];
         var textToShow = this.state.showFront ? currentCard.front: currentCard.back;
 

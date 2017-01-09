@@ -62,7 +62,7 @@ if (window.FC === undefined) {
       }
     }, {
       key: 'navigateToQuiz',
-      value: function navigateToQuiz(setId) {
+      value: function navigateToQuiz(setId, cardLength) {
         ReactRouter.hashHistory.push('/set/' + setId + '/quizzer');
       }
     }, {
@@ -71,7 +71,6 @@ if (window.FC === undefined) {
         var _this4 = this;
 
         console.log('SetList.render', this.state);
-
         var noSetsMessaging;
         if (this.state.sets.length === 0) {
           noSetsMessaging = React.createElement(
@@ -99,6 +98,17 @@ if (window.FC === undefined) {
             'ul',
             null,
             this.state.sets.map(function (set, index) {
+              var noCardsMessaging;
+              if (set.cards.length > 0) {
+                noCardsMessaging = React.createElement(
+                  'div',
+                  { className: 'button quiz', onClick: function onClick() {
+                      _this4.navigateToQuiz(set.id, set.cards.length);
+                    } },
+                  'quiz'
+                );
+              }
+
               return React.createElement(
                 'li',
                 { key: set.id, className: 'set' },
@@ -132,13 +142,7 @@ if (window.FC === undefined) {
                     } },
                   'add cards'
                 ),
-                React.createElement(
-                  'div',
-                  { className: 'button quiz', onClick: function onClick() {
-                      _this4.navigateToQuiz(set.id);
-                    } },
-                  'quiz'
-                )
+                noCardsMessaging
               );
             })
           )

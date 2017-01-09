@@ -40,13 +40,12 @@ if (window.FC === undefined) { window.FC = {}; }
       ReactRouter.hashHistory.push('/set/' + setId);
     }
 
-    navigateToQuiz(setId) {
-      ReactRouter.hashHistory.push('/set/' + setId + '/quizzer');
-    }
+    navigateToQuiz(setId, cardLength) {
+        ReactRouter.hashHistory.push('/set/' + setId + '/quizzer');
+   }
 
     render() {
       console.log('SetList.render', this.state);
-
       var noSetsMessaging;
       if (this.state.sets.length === 0) {
         noSetsMessaging = <p>You do not have any sets! Create one.</p>
@@ -61,6 +60,11 @@ if (window.FC === undefined) { window.FC = {}; }
 
         <ul>
         {this.state.sets.map((set, index) => {
+          var noCardsMessaging;
+          if (set.cards.length > 0 ) {
+            noCardsMessaging = <div className="button quiz" onClick={() => {this.navigateToQuiz(set.id, set.cards.length)}}>quiz</div>
+          }
+
           return <li key={set.id} className="set">
             <div className="set-name">{set.name}</div>
             <div className="number-of-cards"># of cards: {set.cards.length}</div>
@@ -68,7 +72,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
             <div className="button delete-set" onClick={() => {this.deleteSet(set.id)}}>delete</div>
             <div className="button add-cards" onClick={() => {this.addCards(set.id)}}>add cards</div>
-            <div className="button quiz" onClick={() => {this.navigateToQuiz(set.id)}}>quiz</div>
+            {noCardsMessaging}
 
           </li>
         })}
