@@ -157,6 +157,10 @@ footer {
   width: 20%;
   word-wrap: break-word; }
 
+.invalid {
+  background-color: #fff0f0;
+  border: solid 1px red; }
+
 .set-component .card {
   border: solid 1px #000;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
