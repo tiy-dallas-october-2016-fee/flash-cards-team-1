@@ -62,7 +62,7 @@ if (window.FC === undefined) {
       }
     }, {
       key: 'navigateToQuiz',
-      value: function navigateToQuiz(setId, cardLength) {
+      value: function navigateToQuiz(setId) {
         ReactRouter.hashHistory.push('/set/' + setId + '/quizzer');
       }
     }, {

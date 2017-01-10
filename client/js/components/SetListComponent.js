@@ -39,9 +39,9 @@ if (window.FC === undefined) { window.FC = {}; }
       ReactRouter.hashHistory.push('/set/' + setId);
     }
 
-    navigateToQuiz(setId, cardLength) {
-      ReactRouter.hashHistory.push('/set/' + setId + '/quizzer');
-    }
+    navigateToQuiz(setId) {
+        ReactRouter.hashHistory.push('/set/' + setId + '/quizzer');
+   }
 
     render() {
       console.log('SetList.render', this.state);

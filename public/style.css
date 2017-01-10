@@ -98,6 +98,12 @@ footer {
 .create-account input {
   display: block; }
 
+.incomplete {
+  border: 1px solid red; }
+
+.incomplete-p {
+  color: red; }
+
 .card-editor input {
   display: block;
   margin: 20px 0; }
