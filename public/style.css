@@ -65,7 +65,7 @@ form input {
   padding: 5px; }
 
 header {
-  background-color: #000;
+  background-color: #15499b;
   color: #FFF;
   padding: 10px;
   position: relative; }
@@ -110,8 +110,9 @@ footer {
 
 .card-editor textarea {
   display: block;
+  height: 100px;
   margin-bottom: 5px;
-  padding: 5px 60px 50px 5px;
+  width: 20%;
   word-wrap: break-word; }
 
 .card-list {
@@ -151,9 +152,14 @@ footer {
 
 .set-editor textarea {
   display: block;
+  height: 100px;
   margin-bottom: 5px;
-  padding: 5px 60px 50px 5px;
+  width: 20%;
   word-wrap: break-word; }
+
+.invalid {
+  background-color: #fff0f0;
+  border: solid 1px red; }
 
 .set-component .card {
   border: solid 1px #000;

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19,53 +19,97 @@ if (window.FC === undefined) {
     function SetEditorComponent() {
       _classCallCheck(this, SetEditorComponent);
 
-      return _possibleConstructorReturn(this, (SetEditorComponent.__proto__ || Object.getPrototypeOf(SetEditorComponent)).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, (SetEditorComponent.__proto__ || Object.getPrototypeOf(SetEditorComponent)).call(this));
+
+      _this.state = {};
+      return _this;
     }
 
     _createClass(SetEditorComponent, [{
-      key: 'submitSet',
+      key: "submitSet",
       value: function submitSet(evt) {
         evt.preventDefault();
+        var makeAjaxCall = true;
 
-        $.ajax({
-          url: '/api/sets',
-          method: 'POST',
-          data: {
-            name: this.nameInput.value,
-            description: this.descriptionTextarea.value
-          }
-        }).done(function (data) {
-          ReactRouter.browserHistory.goBack();
-        });
+        if (this.nameInput.value === '') {
+          makeAjaxCall = false;
+          console.log("met 1");
+          this.setState({
+            nameInvalid: true
+          });
+        } else {
+          console.log("met 1 else");
+          this.setState({
+            nameInvalid: false
+          });
+        }
+
+        if (this.descriptionTextarea.value === '') {
+          makeAjaxCall = false;
+          console.log('met 2');
+          this.setState({
+            textAreaInvalid: true
+          });
+        } else {
+          console.log('met 2 else');
+          this.setState({
+            textAreaInvalid: false
+          });
+        }
+
+        if (makeAjaxCall) {
+          $.ajax({
+            url: '/api/sets',
+            method: 'POST',
+            data: {
+              name: this.nameInput.value,
+              description: this.descriptionTextarea.value
+            }
+          }).done(function (data) {
+            ReactRouter.browserHistory.goBack();
+          });
+        }
       }
     }, {
-      key: 'render',
+      key: "render",
       value: function render() {
         var _this2 = this;
 
+        console.log(this.state);
+        var nameInputClass = '';
+        if (this.state.nameInvalid) {
+          console.log('name is invalid');
+          nameInputClass = 'invalid';
+        }
+
+        var descriptionTextareaClass = '';
+        if (this.state.textAreaInvalid) {
+          descriptionTextareaClass = 'invalid';
+        }
+
         return React.createElement(
-          'div',
-          { className: 'set-editor' },
+          "div",
+          { className: "set-editor" },
           React.createElement(
-            'h2',
+            "h2",
             null,
-            'Set Editor'
+            "Set Editor"
           ),
           React.createElement(
-            'form',
+            "form",
             { onSubmit: function onSubmit(evt) {
                 _this2.submitSet(evt);
               } },
-            React.createElement('input', { placeholder: 'name', ref: function ref(input) {
+            React.createElement("input", { className: nameInputClass, placeholder: "name", ref: function ref(input) {
                 _this2.nameInput = input;
               } }),
-            React.createElement('textarea', { placeholder: 'description', ref: function ref(textarea) {
+            React.createElement("textarea", { className: descriptionTextareaClass, placeholder: "description", ref: function ref(textarea) {
                 _this2.descriptionTextarea = textarea;
               } }),
             React.createElement(
-              'button',
+              "button",
               null,
-              'Save'
+              "Save"
             )
           )
         );

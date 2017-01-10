@@ -6,8 +6,14 @@
 
   textarea {
     display: block;
+    height: 100px;
     margin-bottom: 5px;
-    padding: 5px 60px 50px 5px;
+    width: 20%;
     word-wrap: break-word;
   }
+}
+
+.invalid {
+  background-color: rgb(255,240,240);
+  border: solid 1px red;
 }
