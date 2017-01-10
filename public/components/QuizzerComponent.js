@@ -40,7 +40,10 @@ if (window.FC === undefined) {
           _this2.setState({
             cards: shuffledCards,
             currentCard: 0,
-            showFront: true
+            showFront: true,
+            summary: false,
+            sessionCorrectCount: 0,
+            sessionIncorrectCount: 0
           });
         };
 
@@ -59,7 +62,9 @@ if (window.FC === undefined) {
       value: function endResetValidation() {
         var currentPosition = this.state.currentCard;
         if (currentPosition + 1 >= this.state.cards.length) {
-          ReactRouter.browserHistory.goBack();
+          var copiedState = Object.assign({}, this.state);
+          copiedState.summary = true;
+          this.setState(copiedState);
           return;
         }
         var copiedState = Object.assign({}, this.state);
@@ -69,9 +74,9 @@ if (window.FC === undefined) {
     }, {
       key: "markCorrect",
       value: function markCorrect() {
-
         var card = this.state.cards[this.state.currentCard];
-        card.correctCount += 1;
+        this.state.sessionCorrectCount += 1;
+        console.log('correct count', card.correctCount);
         FC.UserData.incrementCorrectCountOnCard(this.props.params.setId, card.id, function () {});
 
         this.endResetValidation();
@@ -80,10 +85,25 @@ if (window.FC === undefined) {
       key: "markIncorrect",
       value: function markIncorrect() {
         var card = this.state.cards[this.state.currentCard];
-        card.incorrectCount += 1;
+        this.state.sessionIncorrectCount += 1;
         FC.UserData.incrementIncorrectCountOnCard(this.props.params.setId, card.id, function () {});
 
         this.endResetValidation();
+      }
+    }, {
+      key: "quizRestart",
+      value: function quizRestart() {
+
+        var shuffledCards = _.shuffle(this.state.cards.slice(0));
+
+        this.setState({
+          cards: shuffledCards,
+          currentCard: 0,
+          showFront: true,
+          summary: false,
+          sessionCorrectCount: 0,
+          sessionIncorrectCount: 0
+        });
       }
     }, {
       key: "render",
@@ -92,7 +112,46 @@ if (window.FC === undefined) {
 
         var cardShower;
         var cardNavigation;
-        if (this.state.cards !== undefined && this.state.cards.length > 0) {
+        var quizSummary;
+
+        if (this.state.summary === true) {
+
+          quizSummary = React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "h2",
+              null,
+              "Summary"
+            ),
+            React.createElement(
+              "p",
+              null,
+              "Correct: ",
+              this.state.sessionCorrectCount
+            ),
+            React.createElement(
+              "p",
+              null,
+              "Incorrect: ",
+              this.state.sessionIncorrectCount
+            ),
+            React.createElement(
+              "p",
+              { className: "p-button", onClick: function onClick() {
+                  _this3.quizRestart();
+                } },
+              "Quiz Restart"
+            ),
+            React.createElement(
+              "p",
+              { className: "p-button", onClick: function onClick() {
+                  _this3.quizRestart();ReactRouter.browserHistory.goBack();
+                } },
+              "Back to set list"
+            )
+          );
+        } else if (this.state.cards !== undefined && this.state.cards.length > 0) {
           var currentCard = this.state.cards[this.state.currentCard];
           var textToShow = this.state.showFront ? currentCard.front : currentCard.back;
 
@@ -139,7 +198,12 @@ if (window.FC === undefined) {
         return React.createElement(
           "div",
           { className: "quizzer" },
-          "The Quizzer",
+          React.createElement(
+            "h1",
+            null,
+            "The Quizzer"
+          ),
+          quizSummary,
           cardShower,
           cardNavigation
         );

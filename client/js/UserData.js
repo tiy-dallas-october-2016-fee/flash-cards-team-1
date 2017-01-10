@@ -88,7 +88,9 @@ if (window.FC === undefined) { window.FC = {}; }
         }
       });
 
+
       card.correctCount += 1;
+      console.log('correct count in UserData', card.correctCount);
 
       $.ajax({
         url: '/api/sets/' + setId + '/card/' + position + '/correct',
@@ -99,7 +101,8 @@ if (window.FC === undefined) { window.FC = {}; }
       });
 
 
-    }
+    },
+
 
   };
 

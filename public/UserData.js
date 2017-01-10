@@ -93,6 +93,7 @@ if (window.FC === undefined) {
       });
 
       card.correctCount += 1;
+      console.log('correct count in UserData', card.correctCount);
 
       $.ajax({
         url: '/api/sets/' + setId + '/card/' + position + '/correct',
