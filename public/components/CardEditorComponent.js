@@ -34,9 +34,23 @@ if (window.FC === undefined) {
         FC.UserData.addCardToSet(this.props.params.setId, this.frontInput.value, this.backTextarea.value, cb);
       }
     }, {
+      key: "addAnotherCard",
+      value: function addAnotherCard(evt) {
+        var _this2 = this;
+
+        evt.preventDefault();
+
+        var cb = function cb() {
+          _this2.frontInput.value = "";
+          _this2.backTextarea.value = "";
+        };
+
+        FC.UserData.addCardToSet(this.props.params.setId, this.frontInput.value, this.backTextarea.value, cb);
+      }
+    }, {
       key: "render",
       value: function render() {
-        var _this2 = this;
+        var _this3 = this;
 
         return React.createElement(
           "div",
@@ -48,19 +62,26 @@ if (window.FC === undefined) {
           ),
           React.createElement(
             "form",
-            { onSubmit: function onSubmit(evt) {
-                _this2.submitCard(evt);
-              } },
+            null,
             React.createElement("input", { placeholder: "front", ref: function ref(input) {
-                _this2.frontInput = input;
+                _this3.frontInput = input;
               } }),
             React.createElement("textarea", { placeholder: "back", ref: function ref(textarea) {
-                _this2.backTextarea = textarea;
+                _this3.backTextarea = textarea;
               } }),
             React.createElement(
               "button",
-              null,
-              "Save"
+              { onClick: function onClick(evt) {
+                  _this3.addAnotherCard(evt);
+                } },
+              "Add another card"
+            ),
+            React.createElement(
+              "button",
+              { onClick: function onClick(evt) {
+                  _this3.submitCard(evt);
+                } },
+              "Done"
             )
           )
         );
