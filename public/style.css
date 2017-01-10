@@ -110,8 +110,9 @@ footer {
 
 .card-editor textarea {
   display: block;
+  height: 100px;
   margin-bottom: 5px;
-  padding: 5px 60px 50px 5px;
+  width: 20%;
   word-wrap: break-word; }
 
 .card-list {
@@ -151,8 +152,9 @@ footer {
 
 .set-editor textarea {
   display: block;
+  height: 100px;
   margin-bottom: 5px;
-  padding: 5px 60px 50px 5px;
+  width: 20%;
   word-wrap: break-word; }
 
 .set-component .card {
