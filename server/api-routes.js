@@ -66,6 +66,20 @@ module.exports = function() {
     Set.findByIdAndRemove(req.params.setId, cb);
   });
 
+  router.post("/api/sets/:setId/edit", (req, res) => {
+
+    var cb = (err, data) => {
+      res.send(data);
+    }
+
+    Set.findByIdAndUpdate(
+      req.params.setId,
+      {description: req.body.description,
+        name: req.body.name},
+      {safe: true, new: true},
+      cb);
+  });
+
   router.post('/api/sets/:setId/card', (req, res) => {
     var cb = (err, data) => {
       //console.log('add card, err, data', err, data);

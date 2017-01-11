@@ -21,8 +21,7 @@ if (window.FC === undefined) {
       React.createElement(Route, { path: "/create-set", component: FC.SetEditorComponent }),
       React.createElement(Route, { path: "/set/:setId", component: FC.SetViewComponent }),
       React.createElement(Route, { path: "/set/:setId/newcard", component: FC.CardEditorComponent }),
-      React.createElement(Route, { path: "/set/:setId/quizzer", component: FC.QuizzerComponent }),
-      React.createElement(Route, { path: "/summary" })
+      React.createElement(Route, { path: "/set/:setId/quizzer", component: FC.QuizzerComponent })
     )
   );
 

@@ -14,7 +14,6 @@ if (window.FC === undefined) { window.FC = {}; }
         <Route path="/set/:setId" component={FC.SetViewComponent} />
         <Route path="/set/:setId/newcard" component={FC.CardEditorComponent} />
         <Route path="/set/:setId/quizzer" component={FC.QuizzerComponent} />
-        <Route path="/summary" />
       </Route>
     </Router>;
 

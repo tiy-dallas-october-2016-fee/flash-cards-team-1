@@ -78,6 +78,7 @@ app.use(require('./account-routes.js')(passport));
 app.use(function(req, res, next) {
   var isAuthed = req.isAuthenticated();
   if (!isAuthed) {
+    console.log("redirected to login");
     res.redirect('/login');
     return;
   }
