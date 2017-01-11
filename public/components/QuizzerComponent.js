@@ -43,7 +43,8 @@ if (window.FC === undefined) {
             showFront: true,
             summary: false,
             sessionCorrectCount: 0,
-            sessionIncorrectCount: 0
+            sessionIncorrectCount: 0,
+            skipped: 0
           });
         };
 
@@ -102,8 +103,27 @@ if (window.FC === undefined) {
           showFront: true,
           summary: false,
           sessionCorrectCount: 0,
-          sessionIncorrectCount: 0
+          sessionIncorrectCount: 0,
+          skipped: 0
         });
+      }
+    }, {
+      key: "skipCard",
+      value: function skipCard() {
+        var currentPosition = this.state.currentCard;
+
+        if (currentPosition + 1 >= this.state.cards.length) {
+          var copiedState = Object.assign({}, this.state);
+          copiedState.summary = true;
+          copiedState.skipped += 1;
+          this.setState(copiedState);
+          return;
+        }
+
+        var copiedState = Object.assign({}, this.state);
+        copiedState.skipped += 1;
+        copiedState.currentCard += 1;
+        this.setState(copiedState);
       }
     }, {
       key: "render",
@@ -138,6 +158,12 @@ if (window.FC === undefined) {
             ),
             React.createElement(
               "p",
+              null,
+              "Skipped: ",
+              this.state.skipped
+            ),
+            React.createElement(
+              "p",
               { className: "p-button", onClick: function onClick() {
                   _this3.quizRestart();
                 } },
@@ -166,9 +192,7 @@ if (window.FC === undefined) {
             ),
             React.createElement(
               "div",
-              {
-                className: "card",
-                onClick: function onClick(evt) {
+              { className: "card", onClick: function onClick(evt) {
                   _this3.cardClicked(evt);
                 } },
               textToShow
@@ -191,6 +215,13 @@ if (window.FC === undefined) {
                   _this3.markIncorrect();
                 } },
               "Incorrect"
+            ),
+            React.createElement(
+              "div",
+              { onClick: function onClick() {
+                  _this3.skipCard();
+                } },
+              "Skip"
             )
           );
         }

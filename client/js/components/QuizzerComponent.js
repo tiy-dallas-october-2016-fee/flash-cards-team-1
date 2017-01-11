@@ -24,7 +24,8 @@ if (window.FC === undefined) { window.FC = {}; }
           showFront: true,
           summary: false,
           sessionCorrectCount: 0,
-          sessionIncorrectCount: 0
+          sessionIncorrectCount: 0,
+          skipped: 0
         });
       };
 
@@ -81,8 +82,26 @@ if (window.FC === undefined) { window.FC = {}; }
         showFront: true,
         summary: false,
         sessionCorrectCount: 0,
-        sessionIncorrectCount: 0
+        sessionIncorrectCount: 0,
+        skipped: 0
       });
+    }
+
+    skipCard() {
+      var currentPosition = this.state.currentCard;
+
+      if (currentPosition + 1 >= this.state.cards.length) {
+        var copiedState = Object.assign({}, this.state);
+        copiedState.summary = true;
+        copiedState.skipped += 1;
+        this.setState(copiedState);
+        return;
+      }
+
+      var copiedState = Object.assign({}, this.state);
+      copiedState.skipped += 1;
+      copiedState.currentCard += 1;
+      this.setState(copiedState);
     }
 
     render() {
@@ -96,6 +115,7 @@ if (window.FC === undefined) { window.FC = {}; }
         quizSummary = <div><h2>Summary</h2>
           <p>Correct: {this.state.sessionCorrectCount}</p>
           <p>Incorrect: {this.state.sessionIncorrectCount}</p>
+          <p>Skipped: {this.state.skipped}</p>
           <p className="p-button" onClick={() => { this.quizRestart(); }}>Quiz Restart</p>
           <p className="p-button" onClick={() => { this.quizRestart(); ReactRouter.browserHistory.goBack(); }}>Back to set list</p>
         </div>
@@ -108,16 +128,16 @@ if (window.FC === undefined) { window.FC = {}; }
 
         cardShower = <div>
           <div>Card count: {this.state.cards.length}</div>
-          <div
-            className="card"
-            onClick={(evt) => { this.cardClicked(evt); }}>
-            {textToShow}</div>
+          <div className="card" onClick={(evt) => { this.cardClicked(evt); }}>
+          {textToShow}
+          </div>
         </div>
 
 
         cardNavigation = <div className="card-navigation">
           <div className="correct" onClick={() => { this.markCorrect();}}>Correct</div>
           <div className="incorrect" onClick={() => {this.markIncorrect();}}>Incorrect</div>
+          <div onClick={() => { this.skipCard(); }}>Skip</div>
         </div>;
       }
 
