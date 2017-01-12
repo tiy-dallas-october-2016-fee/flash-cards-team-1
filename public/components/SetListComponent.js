@@ -22,7 +22,8 @@ if (window.FC === undefined) {
       var _this = _possibleConstructorReturn(this, (SetListComponent.__proto__ || Object.getPrototypeOf(SetListComponent)).call(this));
 
       _this.state = {
-        sets: []
+        sets: [],
+        sortBy: 'name'
       };
       return _this;
     }
@@ -39,8 +40,35 @@ if (window.FC === undefined) {
 
         FC.UserData.loadSets(function (data) {
           _this2.setState({
-            sets: data.sets
+            sets: data.sets,
+            sortBy: _this2.state.sortBy
           });
+        });
+      }
+    }, {
+      key: 'nameSorting',
+      value: function nameSorting() {
+        var clonedArray = this.state.sets.slice(0);
+        clonedArray = clonedArray.sort(function (a, b) {
+          return a.name > b.name;
+        });
+
+        this.setState({
+          sets: clonedArray,
+          sortBy: 'name'
+        });
+      }
+    }, {
+      key: 'cardSorting',
+      value: function cardSorting() {
+        var clonedArray = this.state.sets.slice(0);
+        clonedArray = clonedArray.sort(function (a, b) {
+          return a.cards.length < b.cards.length;
+        });
+
+        this.setState({
+          sets: clonedArray,
+          sortBy: 'cardCount'
         });
       }
     }, {
@@ -81,6 +109,13 @@ if (window.FC === undefined) {
           );
         }
 
+        var theSortingHat = 'sorting';
+        if (this.state.sortBy === 'name') {
+          theSortingHat += 'by-name';
+        } else {
+          theSortingHat += 'by-count';
+        }
+
         return React.createElement(
           'div',
           { className: 'set-list' },
@@ -94,6 +129,24 @@ if (window.FC === undefined) {
             ReactRouter.Link,
             { to: '/create-set' },
             'Create new set'
+          ),
+          React.createElement(
+            'div',
+            { className: theSortingHat },
+            React.createElement(
+              'div',
+              { className: 'by-name', onClick: function onClick() {
+                  return _this4.nameSorting();
+                } },
+              'By Name'
+            ),
+            React.createElement(
+              'div',
+              { className: 'by-card-count', onClick: function onClick() {
+                  return _this4.cardSorting();
+                } },
+              'By # of Cards'
+            )
           ),
           React.createElement(
             'ul',

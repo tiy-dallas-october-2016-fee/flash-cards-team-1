@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -29,7 +29,7 @@ if (window.FC === undefined) {
     }
 
     _createClass(QuizzerComponent, [{
-      key: "componentDidMount",
+      key: 'componentDidMount',
       value: function componentDidMount() {
         var _this2 = this;
 
@@ -51,7 +51,7 @@ if (window.FC === undefined) {
         FC.UserData.getSet(this.props.params.setId, cb);
       }
     }, {
-      key: "cardClicked",
+      key: 'cardClicked',
       value: function cardClicked() {
         var copiedState = Object.assign({}, this.state);
         copiedState.showFront = !copiedState.showFront;
@@ -59,10 +59,16 @@ if (window.FC === undefined) {
         this.setState(copiedState);
       }
     }, {
-      key: "endResetValidation",
+      key: 'endResetValidation',
       value: function endResetValidation() {
         var currentPosition = this.state.currentCard;
         if (currentPosition + 1 >= this.state.cards.length) {
+          console.log('current position', currentPosition);
+          var copiedState = Object.assign({}, this.state);
+          copiedState.summary = true;
+          this.setState(copiedState);
+          return;
+        } else if (currentPosition + 1 >= 10) {
           var copiedState = Object.assign({}, this.state);
           copiedState.summary = true;
           this.setState(copiedState);
@@ -73,7 +79,7 @@ if (window.FC === undefined) {
         this.setState(copiedState);
       }
     }, {
-      key: "markCorrect",
+      key: 'markCorrect',
       value: function markCorrect() {
         var card = this.state.cards[this.state.currentCard];
         this.state.sessionCorrectCount += 1;
@@ -83,7 +89,7 @@ if (window.FC === undefined) {
         this.endResetValidation();
       }
     }, {
-      key: "markIncorrect",
+      key: 'markIncorrect',
       value: function markIncorrect() {
         var card = this.state.cards[this.state.currentCard];
         this.state.sessionIncorrectCount += 1;
@@ -92,7 +98,7 @@ if (window.FC === undefined) {
         this.endResetValidation();
       }
     }, {
-      key: "quizRestart",
+      key: 'quizRestart',
       value: function quizRestart() {
 
         var shuffledCards = _.shuffle(this.state.cards.slice(0));
@@ -108,11 +114,17 @@ if (window.FC === undefined) {
         });
       }
     }, {
-      key: "skipCard",
+      key: 'skipCard',
       value: function skipCard() {
         var currentPosition = this.state.currentCard;
 
         if (currentPosition + 1 >= this.state.cards.length) {
+          var copiedState = Object.assign({}, this.state);
+          copiedState.summary = true;
+          copiedState.skipped += 1;
+          this.setState(copiedState);
+          return;
+        } else if (currentPosition + 1 >= 10) {
           var copiedState = Object.assign({}, this.state);
           copiedState.summary = true;
           copiedState.skipped += 1;
@@ -126,7 +138,7 @@ if (window.FC === undefined) {
         this.setState(copiedState);
       }
     }, {
-      key: "render",
+      key: 'render',
       value: function render() {
         var _this3 = this;
 
@@ -137,44 +149,44 @@ if (window.FC === undefined) {
         if (this.state.summary === true) {
 
           quizSummary = React.createElement(
-            "div",
+            'div',
             null,
             React.createElement(
-              "h2",
+              'h2',
               null,
-              "Summary"
+              'Summary'
             ),
             React.createElement(
-              "p",
+              'p',
               null,
-              "Correct: ",
+              'Correct: ',
               this.state.sessionCorrectCount
             ),
             React.createElement(
-              "p",
+              'p',
               null,
-              "Incorrect: ",
+              'Incorrect: ',
               this.state.sessionIncorrectCount
             ),
             React.createElement(
-              "p",
+              'p',
               null,
-              "Skipped: ",
+              'Skipped: ',
               this.state.skipped
             ),
             React.createElement(
-              "p",
-              { className: "p-button", onClick: function onClick() {
+              'p',
+              { className: 'p-button', onClick: function onClick() {
                   _this3.quizRestart();
                 } },
-              "Quiz Restart"
+              'Quiz Restart'
             ),
             React.createElement(
-              "p",
-              { className: "p-button", onClick: function onClick() {
+              'p',
+              { className: 'p-button', onClick: function onClick() {
                   _this3.quizRestart();ReactRouter.browserHistory.goBack();
                 } },
-              "Back to set list"
+              'Back to set list'
             )
           );
         } else if (this.state.cards !== undefined && this.state.cards.length > 0) {
@@ -182,17 +194,17 @@ if (window.FC === undefined) {
           var textToShow = this.state.showFront ? currentCard.front : currentCard.back;
 
           cardShower = React.createElement(
-            "div",
+            'div',
             null,
             React.createElement(
-              "div",
+              'div',
               null,
-              "Card count: ",
+              'Card count: ',
               this.state.cards.length
             ),
             React.createElement(
-              "div",
-              { className: "card", onClick: function onClick(evt) {
+              'div',
+              { className: 'card', onClick: function onClick(evt) {
                   _this3.cardClicked(evt);
                 } },
               textToShow
@@ -200,39 +212,39 @@ if (window.FC === undefined) {
           );
 
           cardNavigation = React.createElement(
-            "div",
-            { className: "card-navigation" },
+            'div',
+            { className: 'card-navigation' },
             React.createElement(
-              "div",
-              { className: "correct", onClick: function onClick() {
+              'div',
+              { className: 'correct', onClick: function onClick() {
                   _this3.markCorrect();
                 } },
-              "Correct"
+              'Correct'
             ),
             React.createElement(
-              "div",
-              { className: "incorrect", onClick: function onClick() {
+              'div',
+              { className: 'incorrect', onClick: function onClick() {
                   _this3.markIncorrect();
                 } },
-              "Incorrect"
+              'Incorrect'
             ),
             React.createElement(
-              "div",
+              'div',
               { onClick: function onClick() {
                   _this3.skipCard();
                 } },
-              "Skip"
+              'Skip'
             )
           );
         }
 
         return React.createElement(
-          "div",
-          { className: "quizzer" },
+          'div',
+          { className: 'quizzer' },
           React.createElement(
-            "h1",
+            'h1',
             null,
-            "The Quizzer"
+            'The Quizzer'
           ),
           quizSummary,
           cardShower,

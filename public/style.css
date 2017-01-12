@@ -119,34 +119,54 @@ footer {
 .card-list {
   border: solid 1px blue; }
 
-.set-list .set {
-  border: solid 1px #000;
-  margin: 10px 0;
-  max-width: 400px;
-  padding: 10px; }
-
-.set-list .set-name {
-  float: left;
-  font-weight: bold;
-  margin-bottom: 10px; }
-
-.set-list p {
-  clear: both; }
-
-.set-list .number-of-cards {
-  color: #888;
-  float: right;
-  text-align: right; }
-
-.set-list .button {
-  background-color: black;
-  color: white;
-  display: inline-block;
-  margin: 5px;
-  padding: 10px; }
-
-.set-list .button:hover {
-  color: #DDD; }
+.set-list {
+  /*
+  div {
+    float: left;
+  }
+  */ }
+  .set-list .create-list {
+    display: block; }
+  .set-list .sorting {
+    border: 1px solid black;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 20px; }
+  .set-list div:first-child {
+    margin: 0 40px 0 0; }
+  .set-list .sorting.by-name .by-name {
+    color: black;
+    font-weight: bold; }
+  .set-list .sorting.by-name .by-card-count {
+    color: gray; }
+  .set-list .sorting.by-count .by-card-count {
+    color: black;
+    font-weight: bold; }
+  .set-list .sorting.by-count .by-name {
+    color: gray; }
+  .set-list .set {
+    border: solid 1px #000;
+    margin: 10px 0;
+    max-width: 400px;
+    padding: 10px; }
+  .set-list .set-name {
+    float: left;
+    font-weight: bold;
+    margin-bottom: 10px; }
+  .set-list p {
+    clear: both; }
+  .set-list .number-of-cards {
+    color: #888;
+    float: right;
+    text-align: right; }
+  .set-list .button {
+    background-color: black;
+    color: white;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px; }
+  .set-list .button:hover {
+    color: #DDD; }
 
 .set-editor input {
   display: block; }
@@ -174,7 +194,6 @@ footer {
   width: 42%; }
 
 .set-component .back {
-  border: 1px solid red;
   display: inline-block;
   width: 100%;
   word-wrap: break-word; }

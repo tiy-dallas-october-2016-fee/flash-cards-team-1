@@ -43,6 +43,13 @@ if (window.FC === undefined) { window.FC = {}; }
     endResetValidation(){
       var currentPosition = this.state.currentCard;
       if (currentPosition + 1 >= this.state.cards.length) {
+        console.log('current position', currentPosition);
+        var copiedState = Object.assign({}, this.state);
+        copiedState.summary = true;
+        this.setState(copiedState);
+        return;
+      }
+      else if (currentPosition + 1 >= 10) {
         var copiedState = Object.assign({}, this.state);
         copiedState.summary = true;
         this.setState(copiedState);
@@ -91,6 +98,13 @@ if (window.FC === undefined) { window.FC = {}; }
       var currentPosition = this.state.currentCard;
 
       if (currentPosition + 1 >= this.state.cards.length) {
+        var copiedState = Object.assign({}, this.state);
+        copiedState.summary = true;
+        copiedState.skipped += 1;
+        this.setState(copiedState);
+        return;
+      }
+      else if (currentPosition + 1 >= 10) {
         var copiedState = Object.assign({}, this.state);
         copiedState.summary = true;
         copiedState.skipped += 1;
