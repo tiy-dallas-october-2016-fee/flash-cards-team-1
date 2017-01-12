@@ -31,6 +31,10 @@ form input {
 .main-content {
   padding: 10px 10px 50px 10px;
 }
+canvas{
+  border: solid 2px black;
+  display: block;
+}
 
 @import 'pages/login';
 @import 'pages/create-account';

@@ -93,6 +93,10 @@ footer {
 .main-content {
   padding: 10px 10px 50px 10px; }
 
+canvas {
+  border: solid 2px black;
+  display: block; }
+
 .login input {
   display: block; }
 
@@ -209,6 +213,16 @@ footer {
   max-width: 300px;
   padding: 100px;
   margin-top: 10px; }
+
+.quizzer .label li {
+  display: inline-block;
+  padding-left: 20px; }
+
+.quizzer .label .label-li-two {
+  padding-left: 48px; }
+
+.quizzer .label .label-li-three {
+  padding-left: 39px; }
 
 .quizzer .p-button {
   display: inline-block;

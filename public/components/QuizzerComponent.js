@@ -73,6 +73,11 @@ if (window.FC === undefined) {
           copiedState.summary = true;
           this.setState(copiedState);
           return;
+        } else if (currentPosition + 1 >= 10) {
+          var copiedState = Object.assign({}, this.state);
+          copiedState.summary = true;
+          this.setState(copiedState);
+          return;
         }
         var copiedState = Object.assign({}, this.state);
         copiedState.currentCard += 1;
@@ -114,11 +119,20 @@ if (window.FC === undefined) {
         });
       }
     }, {
+      key: 'canvasLoad',
+      value: function canvasLoad() {}
+    }, {
       key: 'skipCard',
       value: function skipCard() {
         var currentPosition = this.state.currentCard;
 
         if (currentPosition + 1 >= this.state.cards.length) {
+          var copiedState = Object.assign({}, this.state);
+          copiedState.summary = true;
+          copiedState.skipped += 1;
+          this.setState(copiedState);
+          return;
+        } else if (currentPosition + 1 >= 10) {
           var copiedState = Object.assign({}, this.state);
           copiedState.summary = true;
           copiedState.skipped += 1;
@@ -173,6 +187,26 @@ if (window.FC === undefined) {
               null,
               'Skipped: ',
               this.state.skipped
+            ),
+            React.createElement(FC.GraphComponent, { correct: this.state.sessionCorrectCount, incorrect: this.state.sessionIncorrectCount, skipped: this.state.skipped }),
+            React.createElement(
+              'ul',
+              { className: 'label' },
+              React.createElement(
+                'li',
+                null,
+                'Correct'
+              ),
+              React.createElement(
+                'li',
+                { className: 'label-li-two' },
+                'Incorrect'
+              ),
+              React.createElement(
+                'li',
+                { className: 'label-li-three' },
+                'Skipped'
+              )
             ),
             React.createElement(
               'p',

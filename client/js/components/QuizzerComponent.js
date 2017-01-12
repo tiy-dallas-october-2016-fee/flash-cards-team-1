@@ -54,6 +54,11 @@ if (window.FC === undefined) { window.FC = {}; }
         copiedState.summary = true;
         this.setState(copiedState);
         return;
+      } else if (currentPosition + 1 >= 10) {
+        var copiedState = Object.assign({}, this.state);
+        copiedState.summary = true;
+        this.setState(copiedState);
+        return;
       }
       var copiedState = Object.assign({}, this.state);
       copiedState.currentCard += 1;
@@ -94,10 +99,20 @@ if (window.FC === undefined) { window.FC = {}; }
       });
     }
 
+    canvasLoad() {
+
+    }
+
     skipCard() {
       var currentPosition = this.state.currentCard;
 
       if (currentPosition + 1 >= this.state.cards.length) {
+        var copiedState = Object.assign({}, this.state);
+        copiedState.summary = true;
+        copiedState.skipped += 1;
+        this.setState(copiedState);
+        return;
+      } else if (currentPosition + 1 >= 10) {
         var copiedState = Object.assign({}, this.state);
         copiedState.summary = true;
         copiedState.skipped += 1;
@@ -124,12 +139,20 @@ if (window.FC === undefined) { window.FC = {}; }
       var cardNavigation;
       var quizSummary;
 
+
       if (this.state.summary === true) {
+
 
         quizSummary = <div><h2>Summary</h2>
           <p>Correct: {this.state.sessionCorrectCount}</p>
           <p>Incorrect: {this.state.sessionIncorrectCount}</p>
           <p>Skipped: {this.state.skipped}</p>
+          <FC.GraphComponent correct={this.state.sessionCorrectCount} incorrect={this.state.sessionIncorrectCount} skipped={this.state.skipped} />
+          <ul className="label">
+            <li>Correct</li>
+            <li className="label-li-two">Incorrect</li>
+            <li className="label-li-three">Skipped</li>
+          </ul>
           <p className="p-button" onClick={() => { this.quizRestart(); }}>Quiz Restart</p>
           <p className="p-button" onClick={() => { this.quizRestart(); ReactRouter.browserHistory.goBack(); }}>Back to set list</p>
         </div>

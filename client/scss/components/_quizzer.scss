@@ -6,6 +6,18 @@
     padding: 100px;
     margin-top: 10px;
   }
+  .label{
+    li{
+      display: inline-block;
+      padding-left: 20px;
+    }
+    .label-li-two {
+      padding-left: 48px;
+    }
+    .label-li-three {
+      padding-left: 39px;
+    }
+  }
   .p-button{
     display: inline-block;
     padding-right: 10px;
