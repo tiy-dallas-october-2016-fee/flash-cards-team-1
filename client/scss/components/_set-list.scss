@@ -1,4 +1,41 @@
 .set-list {
+  .create-list{
+    display: block;
+  }
+
+  .sorting{
+    border: 1px solid black;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 20px;
+  }
+/*
+  div {
+    float: left;
+  }
+  */
+  div:first-child{
+    margin: 0 40px 0 0;
+  }
+
+  .sorting.by-name{
+    .by-name{
+      color: black;
+      font-weight: bold;
+    }
+    .by-card-count{
+      color: gray;
+    }
+  }
+  .sorting.by-count{
+    .by-card-count{
+      color: black;
+      font-weight: bold;
+    }
+    .by-name{
+      color: gray;
+    }
+  }
 
   .set {
     border: solid 1px #000;

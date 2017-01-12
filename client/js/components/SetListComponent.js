@@ -8,7 +8,8 @@ if (window.FC === undefined) { window.FC = {}; }
       super();
 
       this.state = {
-        sets: []
+        sets: [],
+        sortBy: 'name'
       }
     }
 
@@ -17,12 +18,32 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     loadSets() {
-
       FC.UserData.loadSets((data) => {
         this.setState({
-          sets: data.sets
+          sets: data.sets,
+          sortBy: this.state.sortBy
         });
       });
+    }
+
+    nameSorting(){
+      var clonedArray = this.state.sets.slice(0);
+      clonedArray = clonedArray.sort((a, b) => {return a.name > b.name; });
+
+      this.setState({
+        sets: clonedArray,
+        sortBy: 'name'
+      })
+    }
+
+    cardSorting(){
+      var clonedArray = this.state.sets.slice(0);
+      clonedArray = clonedArray.sort((a, b) => {return a.cards.length < b.cards.length; });
+
+      this.setState({
+        sets: clonedArray,
+        sortBy: 'cardCount'
+      })
     }
 
     deleteSet(setId) {
@@ -51,12 +72,24 @@ if (window.FC === undefined) { window.FC = {}; }
         noSetsMessaging = <p>You do not have any sets! Create one.</p>
       }
 
+      var theSortingHat = 'sorting';
+      if (this.state.sortBy === 'name') {
+        theSortingHat += 'by-name';
+      } else {
+        theSortingHat += 'by-count'
+      }
+
       return <div className="set-list">
         <h2>Set List</h2>
 
         {noSetsMessaging}
 
         <ReactRouter.Link to="/create-set">Create new set</ReactRouter.Link>
+
+        <div className={theSortingHat}>
+          <div className="by-name" onClick={() => this.nameSorting() }>By Name</div>
+          <div className="by-card-count" onClick={() => this.cardSorting() }>By # of Cards</div>
+        </div>
 
         <ul>
         {this.state.sets.map((set, index) => {
