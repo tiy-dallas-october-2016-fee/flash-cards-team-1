@@ -75,16 +75,16 @@ app.get('/', (req, res) => { res.render('index.ejs'); });
 app.use(require('./account-routes.js')(passport));
 
 // All routes after this point require authentication
-app.use(function(req, res, next) {
-  var isAuthed = req.isAuthenticated();
-  if (!isAuthed) {
-    console.log("redirected to login");
-    res.redirect('/login');
-    return;
-  }
-
-  next();
-});
+// app.use(function(req, res, next) {
+//   var isAuthed = req.isAuthenticated();
+//   if (!isAuthed) {
+//     console.log("redirected to login");
+//     res.redirect('/login');
+//     return;
+//   }
+//
+//   next();
+// });
 
 // These are all the routes for the API.
 app.use(require('./api-routes.js')());
