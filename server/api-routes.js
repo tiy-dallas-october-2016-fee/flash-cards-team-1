@@ -2,6 +2,7 @@ var express = require('express');
 var datasource = require('./datasource.js');
 var uuid = require('node-uuid');
 var Set = require('./models/set');
+var QuizSummary = require("./models/quiz");
 
 module.exports = function() {
 
@@ -69,7 +70,7 @@ module.exports = function() {
   router.post("/api/sets/:setId/edit", (req, res) => {
 
     var cb = (err, data) => {
-      res.send(data);
+      res.send(err);
     }
 
     Set.findByIdAndUpdate(
@@ -79,6 +80,23 @@ module.exports = function() {
       {safe: true, new: true},
       cb);
   });
+
+  router.post("/api/sets/:setId/quizzer", (req, res) => {
+
+    var cb = (err, data) => {
+      console.log(data);
+      res.send(data);
+    }
+
+    var summary = new QuizSummary();
+    summary.userId = req.user.userId;
+    summary.setId = req.params.setId;
+    summary.correct = req.body.correct;
+    summary.incorrect = req.body.incorrect;
+    summary.skipped = req.body.skipped;
+    summary.save(cb);
+
+  })
 
   router.post('/api/sets/:setId/card', (req, res) => {
     var cb = (err, data) => {
