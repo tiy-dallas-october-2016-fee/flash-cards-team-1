@@ -159,8 +159,10 @@ footer {
   word-wrap: break-word; }
 
 .invalid {
-  background-color: #fff0f0;
   border: solid 1px red; }
+
+.incomplete-p {
+  color: red; }
 
 .set-component .card {
   border: solid 1px #000;
